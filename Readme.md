@@ -1,8 +1,8 @@
-#Quick Addon for OF + Forecast.io
+#Quick Addon for OF + Darksky.net
 
 This was made for OF 0.9.3 on OSX but should be just fine crossplatform since it's just using `ofLoadURLAsync()` behind the scenes. Requires ofxJSON - which is eventually going to be in the core for the next OF version.
 
-To use this and the example, you will need an API key from [Forecast.io](https://developer.forecast.io)'s developer portal. You can either put the API key directly in your code, or put it in a text file in your data folder at named apikey.txt and follow the example.
+To use this and the example, you will need an API key from [Darksky.net](https://darksky.net/dev/docs)'s developer portal. You can either put the API key directly in your code, or put it in a text file in your data folder at named apikey.txt and follow the example.
 
 There would still be a lot to do here and probably some smarter ways to manage the data, but it works for basic stuff. There are plenty of data points that I didn't expose. Most of this is only for the "Current Time" but Forecast.io offers the ability to go back in time and also provide the upcoming forecast for the next week. See all possible data points [here](https://developer.forecast.io/docs/v2)
 
