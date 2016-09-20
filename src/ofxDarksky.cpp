@@ -1,21 +1,21 @@
 //
-//  ofxForecastIO.cpp
-//  ofxForecastIO
+//  ofxDarksky.cpp
+//  ofxDarksky
 //
 //  Created by Blair Neal on 9/6/16.
 //
 //
 
-#include "ofxForecastIO.h"
+#include "ofxDarksky.h"
 
 
-void ofxForecastIO::setup(float _lat, float _longitude, string _api_key){
+void ofxDarksky::setup(float _lat, float _longitude, string _api_key){
     ofRegisterURLNotification(this);
     APIKey = _api_key; //need to read this in as a value from an XML or JSON, don't store in code
     latitude = _lat;
     longitude = _longitude; //Address of 45 Main St.
     
-    forecastURL = "https://api.forecast.io/forecast/"+ APIKey + "/" + ofToString(latitude)+","+ofToString(longitude);
+    forecastURL = "https://api.darksky.net/forecast/"+ APIKey + "/" + ofToString(latitude)+","+ofToString(longitude);
     cout<<"Setup Pinging: "<<forecastURL<<endl;
     ofLoadURLAsync(forecastURL, "weather");
     
@@ -23,7 +23,7 @@ void ofxForecastIO::setup(float _lat, float _longitude, string _api_key){
 }
 
 
-void ofxForecastIO::urlResponse(ofHttpResponse & response){
+void ofxDarksky::urlResponse(ofHttpResponse & response){
     
     if(response.request.name == "weather")
     {
@@ -31,7 +31,7 @@ void ofxForecastIO::urlResponse(ofHttpResponse & response){
     }
 }
 
-void ofxForecastIO::parseWeather(ofBuffer buffer)
+void ofxDarksky::parseWeather(ofBuffer buffer)
 {
     ofLog(OF_LOG_VERBOSE)<<"parseWeather"<<endl;
     
@@ -63,7 +63,7 @@ void ofxForecastIO::parseWeather(ofBuffer buffer)
     }
 }
 
-void ofxForecastIO::drawDebug(){
+void ofxDarksky::drawDebug(){
     ofSetColor(255);
     string output = "Current Weather at " + ofToString(latitude) + " " + ofToString(longitude) + "\n\n";
     
@@ -113,7 +113,7 @@ void ofxForecastIO::drawDebug(){
     
 }
 
-void ofxForecastIO::drawGraph(vector<float> vals, int min, int max, int locX, int locY){
+void ofxDarksky::drawGraph(vector<float> vals, int min, int max, int locX, int locY){
     
   
     ofPushMatrix();
@@ -137,7 +137,7 @@ void ofxForecastIO::drawGraph(vector<float> vals, int min, int max, int locX, in
     ofPopMatrix();
 }
 
-void ofxForecastIO::setNewLocation(float _latitude, float _longitude){
+void ofxDarksky::setNewLocation(float _latitude, float _longitude){
     
     //make sure the ranges are in proper values...
     latitude = _latitude;
@@ -147,17 +147,17 @@ void ofxForecastIO::setNewLocation(float _latitude, float _longitude){
     
 }
 
-void ofxForecastIO::requestUpdate(){
+void ofxDarksky::requestUpdate(){
     //Be careful about how often you ping the API for updates! You only get 1000 API requests a day in the free tier - so if you're running this for 12 hours a day, you can ask for an update about once every minute to stay safely within the limit (12*60 = 720)
-    forecastURL = "https://api.forecast.io/forecast/"+ APIKey + "/" + ofToString(latitude)+","+ofToString(longitude);
+    forecastURL = "https://api.darksky.net/forecast/"+ APIKey + "/" + ofToString(latitude)+","+ofToString(longitude);
     ofLog()<<"Pinging: "<<forecastURL<<endl;
     ofLoadURLAsync(forecastURL, "weather");
 }
 
-WeatherData* ofxForecastIO::getWeatherData(){
+WeatherData* ofxDarksky::getWeatherData(){
     return &weatherData;
 }
 
-WeatherData ofxForecastIO::getWeatherDataCopy(){
+WeatherData ofxDarksky::getWeatherDataCopy(){
     return weatherData;
 }

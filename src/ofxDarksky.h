@@ -10,9 +10,9 @@
 #include "ofxJSON.h"
 #include "WeatherData.h"
 
-//API Docs are here: https://developer.forecast.io/docs/v2
+//API Docs are here: https://darksky.net/dev/docs
 
-class ofxForecastIO {
+class ofxDarksky {
     
 public:
     void setup(float _latitude, float _longitude, string _api_key);

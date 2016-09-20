@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
-#include "ofxForecastIO.h"
+#include "ofxDarksky.h"
 
 struct locationData{
     float latitude;
@@ -28,7 +28,7 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 		
-    ofxForecastIO forecast;
+    ofxDarksky forecast;
     
     vector<locationData> locData;
     int currentLoc;
